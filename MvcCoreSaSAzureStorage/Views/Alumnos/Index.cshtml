@@ -1,0 +1,89 @@
+﻿@model IEnumerable<MvcCoreSaSAzureStorage.Models.Alumno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<form method="post">
+    <label>Curso:</label>
+    <input type="text" name="curso" />
+    <button class="btn btn-success">Buscar</button>
+</form>
+
+
+@if(Model != null)
+{
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               IdAlumno
+            </th>
+            <th>
+               Curso
+            </th>
+            <th>
+               Nombre
+            </th>
+            <th>
+               Apellidos
+            </th>
+            <th>
+               Nota
+            </th>
+            <th>
+               PartitionKey
+            </th>
+            <th>
+               RowKey
+            </th>
+            <th>
+               Timestamp
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.IdAlumno
+            </td>
+            <td>
+                @item.Curso
+            </td>
+            <td>
+                @item.Nombre
+            </td>
+            <td>
+                @item.Apellidos
+            </td>
+            <td>
+                @item.Nota
+            </td>
+            <td>
+                @item.PartitionKey
+            </td>
+            <td>
+                @item.RowKey
+            </td>
+            <td>
+                @item.Timestamp
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+}
