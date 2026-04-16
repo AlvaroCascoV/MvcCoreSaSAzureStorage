@@ -25,5 +25,16 @@ namespace MvcCoreSaSAzureStorage.Controllers
             List<Alumno> alumnos = await this.service.GetAlumnosAsync(curso);
             return View(alumnos);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(Alumno alumno)
+        {
+            await this.service.CreateAlumnoAsync(alumno.IdAlumno, alumno.Nombre, alumno.Apellidos, alumno.Nota);
+            return RedirectToAction("Index");
+        }
     }
 }

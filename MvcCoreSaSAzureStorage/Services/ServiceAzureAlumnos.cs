@@ -55,5 +55,22 @@ namespace MvcCoreSaSAzureStorage.Services
             }
             return alumnos;
         }
+
+        public async Task CreateAlumnoAsync(int idAlumno, string nombre, string apellidos, int nota)
+        {
+            string curso = "EN PROCESO";
+            string token = await this.GetTokenAsync(curso);
+            Alumno alumno = new Alumno();
+            alumno.IdAlumno = idAlumno;
+            alumno.Nombre = nombre;
+            alumno.Apellidos = apellidos;
+            alumno.Curso = curso;
+            alumno.Nota = nota;
+            Uri uriToken = new Uri(token);
+            this.tableAlumnos = new TableClient(uriToken);
+            await this.tableAlumnos.AddEntityAsync(alumno);
+        }
+
+
     }
 }

@@ -17,7 +17,10 @@ namespace ApiTokensAzureStorage.Services
         public string GenerateToken(string curso)
         {
             //NECESITAMOS LOS PERMISOS DE ACCESO
-            TableSasPermissions permisos = TableSasPermissions.Read; //para mas permisos "| TableSasPermissions.Add | TableSasPermissions.Update | TableSasPermissions.Delete";
+            TableSasPermissions permisos = TableSasPermissions.Read  //para mas permisos "| TableSasPermissions.Add | TableSasPermissions.Update | TableSasPermissions.Delete";
+            //añadimos permisos de creacion
+                | TableSasPermissions.Add;
+            
             //EL ACCESO A TOKEN ESTA DELIMITADO POR UN TIEMPO DETERMINADO
             TableSasBuilder builder = this.tableAlumnos.GetSasBuilder(permisos, DateTimeOffset.UtcNow.AddMinutes(30));
             //EL ACCESO A LOS DATOS ES MEDIANTE ROWKEY O
